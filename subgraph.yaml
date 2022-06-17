@@ -1,0 +1,59 @@
+specVersion: 0.0.2
+description: "Yuser Collections Subgraph"
+repository: https://github.com/yusernetwork/yuser-subgraph
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: yuserFactory
+    network: mbase
+    source:
+      # has to be replaced with the correct factory address
+      address: '0xc7E7A4156EAe572E39FEd05b9F7581b2ae8Ece8C'
+      abi: yuserFactory
+      startBlock: 2096150
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/mapping.ts
+      entities:
+        - Collection
+      abis:
+        - name: yuserFactory
+          file: ./artifacts/yuserFactory.abi.json
+      eventHandlers:
+        - event: CollectionCreated(address,uint256,address,string)
+          handler: handleNewCollection
+templates:
+  - name: Collection
+    kind: ethereum/contract
+    network: mbase
+    source:
+      abi: yuserCollection
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/mapping.ts
+      entities:
+        - Initialized
+        - Transfer
+        - RoleGranted
+        - RoleRevoked
+        - Mint
+      abis:
+        - name: yuserCollection
+          file: ./artifacts/yuserCollection.abi.json
+      eventHandlers:
+        - event: Initialized(address,string)
+          handler: handleCollectionInitialized
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+        - event: RoleGranted(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleGranted
+        - event: RoleRevoked(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleRevoked
+        - event: Mint(indexed address,indexed address,indexed uint256,string)
+          handler: handleMint
+
