@@ -116,3 +116,13 @@ type SettledEntity @entity {
 
   tokenId: BigInt!
 }
+
+type nextGemsTransferEntity @entity {
+  id: ID! # Transaction hash
+
+  from: String!
+
+  to: String!
+
+  tokenId: BigInt!
+}
