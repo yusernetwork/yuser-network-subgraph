@@ -25,7 +25,7 @@ dataSources:
       eventHandlers:
         - event: CollectionCreated(address,uint256,address,string)
           handler: handleNewCollection
-   - kind: ethereum/contract
+  - kind: ethereum/contract
     name: yuserMarketplace
     network: mbase
     source:
@@ -47,13 +47,13 @@ dataSources:
         - name: yuserMarketplace
           file: ./artifacts/yuserMarketplace.abi.json
       eventHandlers:
-        - event: ItemListed(uint256,uint256,indexed address,indexed uint256,address,ndexed address,uint256)
+        - event: ItemListed(uint256,uint256,indexed address,indexed uint256,address,indexed address,uint256)
           handler: handleItemListed
         - event: Bid(uint256,uint256,indexed address,indexed uint256)
           handler: handleBid
-        - event: Settled(uint256,uint256,indexed address,indexed address,uint256)
+        - event: Settled(uint256,uint256,indexed address,indexed address,indexed uint256)
           handler: handleSettled
-   - kind: ethereum/contract
+  - kind: ethereum/contract
     name: nextGems
     network: mbase
     source:
@@ -66,7 +66,7 @@ dataSources:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
-      file: ./src/nextGemsMapping.ts
+      file: ./src/mapping.ts
       entities:
         - Transfer
       abis:

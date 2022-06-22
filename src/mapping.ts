@@ -83,7 +83,7 @@ export function handleMint(event: Mint): void {
 export function handleItemListed(event: ItemListed): void {
   let itemListed = new ItemListedEntity(event.transaction.hash.toHex());
   itemListed.itemNumber = event.params.itemNumber;
-  itemListed.auctionEnd = event.params.auctionEnd;
+  itemListed.auctionEnd = event.params.auctionEnd.toHexString();
   itemListed.seller = event.params.seller.toHexString();
   itemListed.tokenId = event.params.tokenId;
   itemListed.saleToken = event.params.saleToken.toHexString();
