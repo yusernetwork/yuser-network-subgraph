@@ -79,6 +79,7 @@ export function handleMint(event: Mint): void {
 }
 
 // Events emitted on the marketplace contract
+
 export function handleItemListed(event: ItemListed): void {
   let itemListed = new ItemListedEntity(event.transaction.hash.toHex());
   itemListed.itemNumber = event.params.itemNumber;
@@ -115,6 +116,8 @@ export function handleSettled(event: Settled): void {
 
   log.info(`settled event processed at address: ${event.address}`, []);
 }
+
+// Events emitted by the nextGems contract
 
 export function handleNextGemsTransfer(event: NextGemsTransfer): void {
   let transfer = new TransferEntity(event.transaction.hash.toHex());
