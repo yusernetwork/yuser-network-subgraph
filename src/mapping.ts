@@ -1,9 +1,9 @@
-// import events from the factory contract
 import { CollectionCreated } from "./types/yuserFactory/yuserFactory";
-//import event from the collection contract
+import { ItemListed, Bid, Settled } from "./types/yuserMarketPlace/yuserMarketPlace";
 import { Initialized, Transfer, RoleGranted, RoleRevoked, Mint } from "./types/templates/Collection/yuserCollection";
+import { NextGemsTransfer } from "./types/nextGems/nextGems";
 import { Collection } from "./types/templates";
-import { CollectionEntity, InitializedEntity, TransferEntity, RoleGrantedEntity, RoleRevokedEntity, MintEntity } from './types/schema';
+import { CollectionEntity, InitializedEntity, TransferEntity, RoleGrantedEntity, RoleRevokedEntity, MintEntity, ItemListedEntity, BidEntity, SettledEntity } from './types/schema';
 import { BigInt, log } from "@graphprotocol/graph-ts";
 
 // Events emitted by the factory contract
@@ -16,6 +16,7 @@ export function handleNewCollection(event: CollectionCreated): void {
   collection.owner = event.params.owner.toHexString();
   collection.collectionId = event.params.collectionId;
   Collection.create(event.params.collection);
+  collection.save();
 
   log.info(`Collection creation event processed: collection address: ${collection.collection}`, []);
 }
@@ -38,6 +39,7 @@ export function handleTransfer(event: Transfer): void {
   transfer.to = event.params.to.toHexString();
   transfer.tokenId = event.params.tokenId;
   transfer.collection = event.address.toHexString();
+  transfer.save();
 
   log.info(`Transfer event processed at address: ${event.address}`, []);
 }
@@ -71,8 +73,47 @@ export function handleMint(event: Mint): void {
   mint.tokenId = event.params.tokenId;
   mint.tokenHash = event.params.tokenHash;
   mint.collection = event.address.toHexString();
+  mint.save();
 
   log.info(`Mint event processed at address: ${event.address}`, []);
+}
+
+// Events emitted on the marketplace contract
+export function handleItemListed(event: ItemListed): void {
+  let itemListed = new ItemListedEntity(event.transaction.hash.toHex());
+  itemListed.itemNumber = event.params.itemNumber;
+  itemListed.auctionEnd = event.params.auctionEnd;
+  itemListed.seller = event.params.seller.toHexString();
+  itemListed.tokenId = event.params.tokenId;
+  itemListed.saleToken = event.params.saleToken.toHexString();
+  itemListed.nftToken = event.params.nftToken.toHexString();
+  itemListed.minPrice = event.params.minPrice;
+  itemListed.save();
+
+  log.info(`itemListed event processed at address: ${event.address}`, []);
+}
+
+export function handleBid(event: Bid): void {
+  let bid = new BidEntity(event.transaction.hash.toHex());
+  bid.itemNumber = event.params.itemNumber;
+  bid.bidAmount = event.params.bidAmount;
+  bid.bidder = event.params.bidder.toHexString();
+  bid.tokenId = event.params.tokenId;
+  bid.save();
+
+  log.info(`bid event processed at address: ${event.address}`, []);
+}
+
+export function handleSettled(event: Settled): void {
+  let settled = new SettledEntity(event.transaction.hash.toHex());
+  settled.itemNumber = event.params.itemNumber;
+  settled.bidAmount = event.params.bidAmount;
+  settled.winner = event.params.winner.toHexString();
+  settled.seller = event.params.seller.toHexString();
+  settled.tokenId = event.params.tokenId;
+  settled.save();
+
+  log.info(`settled event processed at address: ${event.address}`, []);
 }
 
 
