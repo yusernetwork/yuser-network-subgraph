@@ -47,14 +47,34 @@ dataSources:
         - name: yuserMarketplace
           file: ./artifacts/yuserMarketplace.abi.json
       eventHandlers:
-        - event: ItemListed(address,uint256,address,string,uint256)
+        - event: ItemListed(uint256,uint256,indexed address,indexed uint256,address,ndexed address,uint256)
           handler: handleItemListed
-        - event: Bid(address,uint256,address,string,uint256)
+        - event: Bid(uint256,uint256,indexed address,indexed uint256)
           handler: handleBid
-        - event: Settled(address,uint256,address,string,uint256)
+        - event: Settled(uint256,uint256,indexed address,indexed address,uint256)
           handler: handleSettled
-          
-
+   - kind: ethereum/contract
+    name: nextGems
+    network: mbase
+    source:
+      # has to be replaced with the correct nextGems address
+      address: '0x8d12A197cB00D4747a1fe03395095ce2A5CC6819'
+      abi: nextGems
+      # has to be replaced with the correct start block
+      startBlock: 2096150
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/nextGemsMapping.ts
+      entities:
+        - Transfer
+      abis:
+        - name: nextGems
+          file: ./artifacts/nextGems.abi.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleNextGemsTransfer
 templates:
   - name: Collection
     kind: ethereum/contract
