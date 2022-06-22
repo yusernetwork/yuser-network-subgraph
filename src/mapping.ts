@@ -1,10 +1,10 @@
 import { CollectionCreated } from "./types/yuserFactory/yuserFactory";
 import { ItemListed, Bid, Settled } from "./types/yuserMarketPlace/yuserMarketPlace";
 import { Initialized, Transfer, RoleGranted, RoleRevoked, Mint } from "./types/templates/Collection/yuserCollection";
-import { NextGemsTransfer } from "./types/nextGems/nextGems";
+import { Transfer as NextGemsTransfer } from "./types/nextGems/nextGems";
 import { Collection } from "./types/templates";
 import { CollectionEntity, InitializedEntity, TransferEntity, RoleGrantedEntity, RoleRevokedEntity, MintEntity, ItemListedEntity, BidEntity, SettledEntity } from './types/schema';
-import { BigInt, log } from "@graphprotocol/graph-ts";
+import { log } from "@graphprotocol/graph-ts";
 
 // Events emitted by the factory contract
 
@@ -114,6 +114,17 @@ export function handleSettled(event: Settled): void {
   settled.save();
 
   log.info(`settled event processed at address: ${event.address}`, []);
+}
+
+export function handleNextGemsTransfer(event: NextGemsTransfer): void {
+  let transfer = new TransferEntity(event.transaction.hash.toHex());
+  transfer.from = event.params.from.toHexString();
+  transfer.to = event.params.to.toHexString();
+  transfer.tokenId = event.params.tokenId;
+  transfer.collection = event.address.toHexString();
+  transfer.save();
+
+  log.info(`Transfer event processed at address: ${event.address}`, []);
 }
 
 
