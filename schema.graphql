@@ -71,3 +71,48 @@ type TransferEntity @entity {
 
     collection: String!
   }
+
+type ItemListedEntity @entity {
+  id: ID! 
+
+  itemNumber: BigInt!
+
+  auctionEnd: String!
+
+  seller: String!
+
+  tokenId: BigInt!
+
+  saleToken: String!
+
+  nftToken: String!
+
+  minPrice: BigInt!
+
+}
+
+type BidEntity @entity {
+  id: ID! # Transaction hash
+
+  itemNumber: BigInt!
+
+  bidAmount: BigInt!
+
+  bidder: String!
+
+  tokenId: BigInt!
+}
+
+type SettledEntity @entity {
+  id: ID! # Transaction hash
+
+  itemNumber: BigInt!
+
+  bidAmount: BigInt!
+
+  winner: String!
+
+  seller: String!
+
+  tokenId: BigInt!
+}
