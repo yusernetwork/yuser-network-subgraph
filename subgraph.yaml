@@ -29,11 +29,11 @@ dataSources:
     name: yuserMarketplace
     network: mbase
     source:
-      # has to be replaced with the correct factory address
-      address: '0x8d12A197cB00D4747a1fe03395095ce2A5CC6819'
+      # has to be replaced with the correct Marketplace address
+      address: '0xEEc874F2A9f79e8eB08BfF83B69AD554DaeCa0f4'
       abi: yuserMarketplace
       # has to be replaced with the correct start block
-      startBlock: 2096150
+      startBlock: 1642636
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -58,10 +58,10 @@ dataSources:
     network: mbase
     source:
       # has to be replaced with the correct nextGems address
-      address: '0x8d12A197cB00D4747a1fe03395095ce2A5CC6819'
+      address: '0xaB150D32733E9c39b5a176A6d5a697ceeF6933eF'
       abi: nextGems
       # has to be replaced with the correct start block
-      startBlock: 2096150
+      startBlock: 1642636
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
