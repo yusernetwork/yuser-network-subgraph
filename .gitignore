@@ -67,3 +67,5 @@ src/types/
 
 # Graph output && contracts deployment addresses
 build/
+
+generated/

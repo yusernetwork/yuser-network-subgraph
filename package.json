@@ -10,8 +10,8 @@
     "deploy": "npx graph deploy yusernetwork/yuser-subgraph --ipfs http://localhost:5001 --node http://127.0.0.1:8020"
   },
   "devDependencies": {
-    "@graphprotocol/graph-cli": "^0.20.0",
-    "@graphprotocol/graph-ts": "^0.20.0"
+    "@graphprotocol/graph-cli": "^0.31.0",
+    "@graphprotocol/graph-ts": "^0.27.0"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
