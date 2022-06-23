@@ -1,9 +1,9 @@
-import { CollectionCreated } from "./types/yuserFactory/yuserFactory";
-import { ItemListed, Bid, Settled } from "./types/yuserMarketPlace/yuserMarketPlace";
-import { Initialized, Transfer, RoleGranted, RoleRevoked, Mint } from "./types/templates/Collection/yuserCollection";
-import { Transfer as NextGemsTransfer } from "./types/nextGems/nextGems";
-import { Collection } from "./types/templates";
-import { CollectionEntity, InitializedEntity, TransferEntity, RoleGrantedEntity, RoleRevokedEntity, MintEntity, ItemListedEntity, BidEntity, SettledEntity } from './types/schema';
+import { CollectionCreated } from "../generated/yuserFactory/yuserFactory";
+import { ItemListed, Bid, Settled } from "../generated/yuserMarketPlace/yuserMarketPlace";
+import { Initialized, Transfer, RoleGranted, RoleRevoked, Mint } from "../generated/templates/Collection/yuserCollection";
+import { Transfer as NextGemsTransfer } from "../generated/nextGems/nextGems";
+import { Collection } from "../generated/templates";
+import { CollectionEntity, InitializedEntity, TransferEntity, RoleGrantedEntity, RoleRevokedEntity, MintEntity, ItemListedEntity, BidEntity, SettledEntity } from '../generated/schema';
 import { log } from "@graphprotocol/graph-ts";
 
 // Events emitted by the factory contract
