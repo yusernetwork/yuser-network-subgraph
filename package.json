@@ -7,7 +7,7 @@
     "create": "npx graph create yusernetwork/yuser-subgraph --node http://127.0.0.1:8020",
     "codegen": "npx graph codegen --output-dir src/types/",
     "build": "npx graph build",
-    "deploy": "npx graph deploy yusernetwork/yuser-subgraph --ipfs http://localhost:5001 --node http://127.0.0.1:8020"
+    "deploy": "npx graph deploy --product hosted-service yusernetwork/yuser-network-subgraph"
   },
   "devDependencies": {
     "@graphprotocol/graph-cli": "^0.31.0",
