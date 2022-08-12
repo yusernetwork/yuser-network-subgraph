@@ -11,7 +11,7 @@ dataSources:
       # has to be replaced with the correct factory address
       address: '0xc7E7A4156EAe572E39FEd05b9F7581b2ae8Ece8C'
       abi: yuserFactory
-      startBlock: 2096150
+      startBlock: 2642521
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
